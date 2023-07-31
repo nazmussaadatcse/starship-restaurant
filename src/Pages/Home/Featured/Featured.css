@@ -1,0 +1,26 @@
+.featured-item {
+    background-image: url('../../../assets/home/featured.jpg');
+    background-size: cover; 
+    background-position: center; 
+    opacity: 80%;
+}
+/* Featured.css */
+
+.featured-item {
+    position: relative;
+  }
+  
+  .featured-item::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../../../assets/home/featured.jpg');
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.6); /* Adjust the brightness value (0.6) to make it darker or lighter */
+    z-index: -1;
+  }
+  
