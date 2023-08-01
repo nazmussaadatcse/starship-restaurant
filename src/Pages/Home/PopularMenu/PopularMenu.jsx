@@ -15,12 +15,12 @@ const PopularMenu = () => {
     },[])
 
     return (
-        <section className="mb-16 p-4">
+        <section className="mb-16 mt-12 p-4">
             <SectionTitle
             heading="From Our Menu"
             subHeading="Popular Items"
             ></SectionTitle>
-            <div className="grid md:grid-cols-2 gap-8">
+            <div className="grid md:grid-cols-2 mt-8 gap-8">
                 {
                     menu.map(item=> <MenuItem
                     key={item._id}
