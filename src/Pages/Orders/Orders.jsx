@@ -11,17 +11,17 @@ import { Helmet } from 'react-helmet-async';
 
 
 const Orders = () => {
-    const categories = ['salad','pizza','soup','dessert', 'drinks']
-    const {category} = useParams();
+    const categories = ['salad', 'pizza', 'soup', 'dessert', 'drinks']
+    const { category } = useParams();
     const initialIndex = categories.indexOf(category)
     const [tabIndex, setTabIndex] = useState(initialIndex);
     const [menu] = useMenu();
 
-    const desserts = menu.filter( item=> item.category === 'dessert');
-    const soup = menu.filter( item=> item.category === 'soup');
-    const salad = menu.filter( item=> item.category === 'salad');
-    const pizza = menu.filter( item=> item.category === 'pizza');
-    const drinks = menu.filter( item=> item.category === 'drinks');
+    const desserts = menu.filter(item => item.category === 'dessert');
+    const soup = menu.filter(item => item.category === 'soup');
+    const salad = menu.filter(item => item.category === 'salad');
+    const pizza = menu.filter(item => item.category === 'pizza');
+    const drinks = menu.filter(item => item.category === 'drinks');
 
     return (
         <div>
@@ -31,13 +31,16 @@ const Orders = () => {
 
             <CoverImg img={orderCoverImg} title={"Order Food"}></CoverImg>
             <Tabs defaultIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
-                <TabList>
-                    <Tab>Salad</Tab>
-                    <Tab>Pizza</Tab>
-                    <Tab>Soup</Tab>
-                    <Tab>Dessert</Tab>
-                    <Tab>Drinks</Tab>
-                </TabList>
+
+                <div className='flex flex-col items-center text-orange-700 font-bold text-xl my-8'>
+                    <TabList>
+                        <Tab>Salad</Tab>
+                        <Tab>Pizza</Tab>
+                        <Tab>Soup</Tab>
+                        <Tab>Dessert</Tab>
+                        <Tab>Drinks</Tab>
+                    </TabList>
+                </div>
 
                 <TabPanel>
                     <OrderTab items={salad}></OrderTab>
