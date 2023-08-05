@@ -1,32 +1,46 @@
 import { useRef } from 'react';
+import { useContext } from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import {Link} from 'react-router-dom';
 import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from 'react-simple-captcha';
+import { AuthContext } from '../../providers/AuthProvider';
+import { Helmet } from 'react-helmet-async';
 
 
 const Login = () => {
 
     const captchaRef = useRef(null);
     const [disabled, setDisabled] = useState(true);
+    const { signIn } = useContext(AuthContext);
 
-    useEffect(()=>{
+    useEffect(() => {
         loadCaptchaEnginge(6);
-    },[])
+    }, [])
 
-    const handleLogin = e =>{
+    const handleLogin = e => {
+        
         e.preventDefault();
         const form = e.target;
         const email = form.email.value;
         const password = form.password.value;
+        console.log('email: ', email, 'pass: ', password);
+
+        signIn(email, password)
+            .then(result => {
+                const user = result.user;
+                console.log('signIn user: ', user);
+            })
     }
-    const handleValidateCaptcha = ()=>{
+    // captcha 
+    const handleValidateCaptcha = () => {
         const userCaptchaValue = captchaRef.current.value;
         console.log(userCaptchaValue);
 
-        if(validateCaptcha(userCaptchaValue)){
+        if (validateCaptcha(userCaptchaValue)) {
             setDisabled(false);
         }
-        else{
+        else {
             setDisabled(true);
             alert('Wrong Captcha. Try Again!');
         }
@@ -34,6 +48,9 @@ const Login = () => {
 
     return (
         <div className="hero min-h-screen">
+            <Helmet>
+                <title>Starship | Login</title>
+            </Helmet>
             <div className="hero-content flex-col lg:flex-row">
                 <div className="text-center md:w-1/2 lg:text-left">
                     <h1 className="text-5xl font-bold">Login now!</h1>
@@ -58,15 +75,16 @@ const Login = () => {
                         </div>
                         <div className="form-control">
                             <label className="label">
-                            <LoadCanvasTemplate />
+                                <LoadCanvasTemplate />
                             </label>
-                            <input ref={captchaRef}  type="text" name="captcha" placeholder="type captcha" className="input input-bordered" />
+                            <input ref={captchaRef} type="text" name="captcha" placeholder="type captcha" className="input input-bordered" />
                             <button onClick={handleValidateCaptcha} className='btn btn-outline btn-xs mt-2 font-bold'>validate</button>
                         </div>
                         <div className="form-control mt-6">
-                        <input disabled={disabled} className="btn btn-primary" type="submit" value="login" />
+                            <input disabled={disabled} className="btn btn-primary" type="submit" value="login" />
                         </div>
                     </form>
+                    <p className='flex justify-center p-2 text-lg font-bold'>New Here? <Link className='text-orange-600 ml-2' to={"/signup"}>Create an Account</Link></p>
                 </div>
             </div>
         </div>
