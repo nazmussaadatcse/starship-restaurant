@@ -19,7 +19,9 @@ const NavBar = () => {
         
         {
             user? 
-            <><button onClick={handleLogout} className="btn btn-ghost">logout</button></> 
+            <>
+            <span className="border pl-2 pr-2 font-bold text-xl">{user?.displayName}</span>
+            <button onClick={handleLogout} className="ml-2 btn btn-ghost">logout</button></> 
             : 
             <><li><Link to={'/login'}>Login</Link></li></>
         }
@@ -39,7 +41,7 @@ const NavBar = () => {
                     <a className="btn btn-ghost normal-case text-xl">Starship Restaurant</a>
                 </div>
                 <div className="navbar-center hidden lg:flex">
-                    <ul className="menu menu-horizontal px-1">
+                    <ul className="menu menu-horizontal px-1 flex flex-row items-center">
                         {navOptions}
                     </ul>
                 </div>
