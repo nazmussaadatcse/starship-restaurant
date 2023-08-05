@@ -20,7 +20,7 @@ const NavBar = () => {
         {
             user? 
             <>
-            <span className="border pl-2 pr-2 font-bold text-xl">{user?.displayName}</span>
+            <span className="border pl-2 pr-2 text-xl">{user?.displayName}</span>
             <button onClick={handleLogout} className="ml-2 btn btn-ghost">logout</button></> 
             : 
             <><li><Link to={'/login'}>Login</Link></li></>
