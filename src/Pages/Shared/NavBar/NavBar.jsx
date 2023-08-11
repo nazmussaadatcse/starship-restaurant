@@ -1,29 +1,39 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../providers/AuthProvider";
+import { FaShoppingCart } from 'react-icons/fa';
+
 
 const NavBar = () => {
-    const {user, logOut} = useContext(AuthContext);
-    const handleLogout = ()=>{
+    const { user, logOut } = useContext(AuthContext);
+    const handleLogout = () => {
         logOut()
-        .then(()=>{
-            console.log('logged out');
-        })
-        .catch(err=> console.log(err));
+            .then(() => {
+                console.log('logged out');
+            })
+            .catch(err => console.log(err));
     }
 
     const navOptions = <>
         <li><Link to={'/'}>Home</Link></li>
         <li><Link to={'/menu'}>Our Menu</Link></li>
         <li><Link to={'/orders/salad'}>Orders</Link></li>
-        
+        <li>
+            <Link to={'/'}>
+                <button className="btn bg-black bg-opacity-5 hover:bg-transparent border text-pink-600 text-2xl">
+                        <FaShoppingCart></FaShoppingCart>
+                    <div className="badge badge-secondary">+0</div>
+                </button>
+            </Link>
+        </li>
+
         {
-            user? 
-            <>
-            <span className="border pl-2 pr-2 text-xl">{user?.displayName}</span>
-            <button onClick={handleLogout} className="ml-2 btn btn-ghost">logout</button></> 
-            : 
-            <><li><Link to={'/login'}>Login</Link></li></>
+            user ?
+                <>
+                    <span className="border pl-2 pr-2 text-xl">{user?.displayName}</span>
+                    <button onClick={handleLogout} className="ml-2 btn btn-ghost">logout</button></>
+                :
+                <><li><Link to={'/login'}>Login</Link></li></>
         }
     </>
     return (

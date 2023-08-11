@@ -71,16 +71,13 @@ const Menu = () => {
             img={soupImg}
             ></MenuCategory>
 
-            {/* soup menu   */}
+            {/* drinks menu   */}
 
              <MenuCategory
             items={drinks}
             title={"drinks"}
             img={soupImg}
             ></MenuCategory>
-
-
-           
             
         </div>
     );

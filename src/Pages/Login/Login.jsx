@@ -14,12 +14,16 @@ const Login = () => {
     const { signIn } = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
-
+    const [errorMessage, setErrorMessage] = useState('');
     const from = location.state?.from?.pathname || '/';
 
     useEffect(() => {
         loadCaptchaEnginge(6);
     }, [])
+
+    const clearErrorMessage = () => {
+        setErrorMessage('');
+    };
 
     const handleLogin = e => {
 
@@ -45,8 +49,13 @@ const Login = () => {
                 })
                 navigate(from,{replace:true});
             })
+            .catch(err=> {
+                console.log(err);
+                setErrorMessage('Incorrect Email/Password.');
+                setTimeout(clearErrorMessage, 2000); //error message timer 2 sec
+            });
     }
-    // captcha 
+    // captcha validate
     const handleValidateCaptcha = (e) => {
         const userCaptchaValue = e.target.value;
         console.log(userCaptchaValue);
@@ -88,12 +97,17 @@ const Login = () => {
                             </label>
                         </div>
                         <div className="form-control">
+                            {/* captcha load  */}
                             <label className="label">
                                 <LoadCanvasTemplate />
                             </label>
+                            {/* validate button  */}
                             <input onBlur={handleValidateCaptcha} type="text" name="captcha" placeholder="type captcha" className="input input-bordered" />
                             <div className='btn btn-outline btn-xs mt-2 font-bold'>validate</div>
                         </div>
+                        {/* error message  */}
+                        <div className='text-red-600 text-center bg-yellow-500 font-bold rounded'>{errorMessage}</div>
+                        {/* login button  */}
                         <div className="form-control mt-6">
                             <input disabled={disabled} className="btn btn-primary" type="submit" value="login" />
                         </div>

@@ -56,6 +56,9 @@ const SignUp = () => {
         if (validateCaptcha(userCaptchaValue)) {
             setDisabled(false);
         }
+        else if(userCaptchaValue.length < 6) {
+            setDisabled(true);
+        }
         else {
             setDisabled(true);
             alert('Wrong Captcha. Try Again!');
