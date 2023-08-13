@@ -109,7 +109,7 @@ const Login = () => {
                         <div className='text-red-600 text-center bg-yellow-500 font-bold rounded'>{errorMessage}</div>
                         {/* login button  */}
                         <div className="form-control mt-6">
-                            <input disabled={disabled} className="btn btn-primary" type="submit" value="login" />
+                            <input disabled={false} className="btn btn-primary" type="submit" value="login" />
                         </div>
                     </form>
                     <p className='flex justify-center p-2 text-lg font-bold'>New Here? <Link className='text-orange-600 ml-2' to={"/signup"}>Create an Account</Link></p>
