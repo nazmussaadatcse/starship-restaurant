@@ -12,12 +12,13 @@ const FoodCard = ({ item }) => {
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
+    const [,refetch] = useCart();
 
     const HandleAddToCart = item => {
-        const [refetch] = useCart()
+        
         console.log(item);
         const cartItem = {menuItemId: _id, name, image, price, email:user.email}
-        if (user && user.email) {
+        if (user && user?.email) {
             fetch('http://localhost:5000/carts',{
                 method: 'POST',
                 headers:{
