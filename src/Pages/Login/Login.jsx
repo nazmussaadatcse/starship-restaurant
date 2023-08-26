@@ -6,15 +6,16 @@ import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, val
 import { AuthContext } from '../../providers/AuthProvider';
 import { Helmet } from 'react-helmet-async';
 import Swal from 'sweetalert2';
+import SocialLogin from '../Shared/SocialLogin/SocialLogin';
 
 
 const Login = () => {
 
     const [disabled, setDisabled] = useState(true);
     const { signIn } = useContext(AuthContext);
+    const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
     const location = useLocation();
-    const [errorMessage, setErrorMessage] = useState('');
     const from = location.state?.from?.pathname || '/';
 
     useEffect(() => {
@@ -113,6 +114,7 @@ const Login = () => {
                         </div>
                     </form>
                     <p className='flex justify-center p-2 text-lg font-bold'>New Here? <Link className='text-orange-600 ml-2' to={"/signup"}>Create an Account</Link></p>
+                    <SocialLogin></SocialLogin>
                 </div>
             </div>
         </div>

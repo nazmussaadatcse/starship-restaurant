@@ -8,6 +8,7 @@ import { useForm } from 'react-hook-form';
 import { Helmet } from 'react-helmet-async';
 import Swal from 'sweetalert2';
 import { data } from 'autoprefixer';
+import SocialLogin from '../Shared/SocialLogin/SocialLogin';
 
 const SignUp = () => {
 
@@ -36,7 +37,7 @@ const SignUp = () => {
                     .then(() => {
                         console.log('user profile info updated!');
 
-                        const saveUser = {name: e.name, email: e.email}
+                        const saveUser = {name: e.name, email: e.email};
                         fetch('http://localhost:5000/users',{
                             method: 'POST',
                             headers:{
@@ -146,6 +147,7 @@ const SignUp = () => {
                         </div>
                     </form>
                     <p className='flex justify-center p-2 text-lg font-bold'>Already have an Account? <Link className='text-orange-600 ml-2' to={"/login"}>Login</Link></p>
+                    <SocialLogin></SocialLogin>
                 </div>
             </div>
         </div>
