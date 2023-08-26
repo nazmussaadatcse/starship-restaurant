@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 import { Link , useNavigate, useLocation } from 'react-router-dom';
 import useCart from "../../hooks/useCart";
 
-
+// optional chaining is imp 
 
 const FoodCard = ({ item }) => {
 
@@ -17,7 +17,8 @@ const FoodCard = ({ item }) => {
     const HandleAddToCart = item => {
         
         console.log(item);
-        const cartItem = {menuItemId: _id, name, image, price, email:user.email}
+        const cartItem = {menuItemId: _id, name, image, price, email:user?.email}
+        // optional chaining is imp 
         if (user && user?.email) {
             fetch('http://localhost:5000/carts',{
                 method: 'POST',

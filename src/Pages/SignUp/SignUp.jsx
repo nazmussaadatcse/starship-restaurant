@@ -1,23 +1,24 @@
 import { useContext } from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { Link , useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from 'react-simple-captcha';
 import { AuthContext } from '../../providers/AuthProvider';
 import { useForm } from 'react-hook-form';
 import { Helmet } from 'react-helmet-async';
 import Swal from 'sweetalert2';
+import { data } from 'autoprefixer';
 
 const SignUp = () => {
 
-    const {register,
+    const { register,
         handleSubmit,
         reset,
         formState: { errors },
-      } = useForm()
+    } = useForm()
 
     const [disabled, setDisabled] = useState(true);
-    const { createUser , updateUserProfile} = useContext(AuthContext);
+    const { createUser, updateUserProfile } = useContext(AuthContext);
     const navigate = useNavigate();
 
 
@@ -28,25 +29,41 @@ const SignUp = () => {
     const handleSignUp = e => {
         console.log(e);
         createUser(e.email, e.password)
-        .then(result=>{
-            const loggedUser = result.user;
-            console.log(loggedUser);
-            updateUserProfile(e.name, e.photoURL)
-            .then(()=>{
-                console.log('user profile info updated!');
-                reset();
-                Swal.fire({
-                    position: 'center',
-                    icon: 'success',
-                    title: 'User Created Successfully!',
-                    showConfirmButton: false,
-                    timer: 1500
-                  })
-                  navigate('/');
+            .then(result => {
+                const loggedUser = result.user;
+                console.log(loggedUser);
+                updateUserProfile(e.name, e.photoURL)
+                    .then(() => {
+                        console.log('user profile info updated!');
+
+                        const saveUser = {name: e.name, email: e.email}
+                        fetch('http://localhost:5000/users',{
+                            method: 'POST',
+                            headers:{
+                                'content-type':'application/json'
+                            },
+                            body: JSON.stringify(saveUser)
+                        })
+                            .then(res => res.json())
+                            .then(data => {
+                                if (data.insertedId) {
+
+                                    reset();
+                                    Swal.fire({
+                                        position: 'center',
+                                        icon: 'success',
+                                        title: 'User Created Successfully!',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    })
+                                    navigate('/');
+                                }
+                            })
+
+                    })
+                    .catch(err => console.log(err));
             })
-            .catch(err=> console.log(err));
-        })
-        
+
     }
     // captcha 
     const handleValidateCaptcha = (e) => {
@@ -56,7 +73,7 @@ const SignUp = () => {
         if (validateCaptcha(userCaptchaValue)) {
             setDisabled(false);
         }
-        else if(userCaptchaValue.length < 6) {
+        else if (userCaptchaValue.length < 6) {
             setDisabled(true);
         }
         else {
@@ -81,7 +98,7 @@ const SignUp = () => {
                             <label className="label">
                                 <span className="label-text">Name</span>
                             </label>
-                            <input type="text" {...register('name', {required:true})} name="name" placeholder="name" className="input input-bordered" />
+                            <input type="text" {...register('name', { required: true })} name="name" placeholder="name" className="input input-bordered" />
                             {errors.name && <span className='text-red-700'>name is required</span>}
 
                         </div>
@@ -89,7 +106,7 @@ const SignUp = () => {
                             <label className="label">
                                 <span className="label-text">Photo URL</span>
                             </label>
-                            <input type="text" {...register('photoURL', {required:true})} placeholder="Photo URL" className="input input-bordered" />
+                            <input type="text" {...register('photoURL', { required: true })} placeholder="Photo URL" className="input input-bordered" />
                             {errors.PhotoURL && <span className='text-red-700'>Photo URL is required</span>}
 
                         </div>
@@ -98,22 +115,22 @@ const SignUp = () => {
                             <label className="label">
                                 <span className="label-text">Email</span>
                             </label>
-                            <input {...register('email',{required:true})} type="text" name="email" placeholder="email" className="input input-bordered" />
+                            <input {...register('email', { required: true })} type="text" name="email" placeholder="email" className="input input-bordered" />
                             {errors.email && <span className='text-red-700'>email is required</span>}
                         </div>
-                        
+
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Password</span>
                             </label>
-                            <input {...register('password',{required:true, minLength: 6, maxLength:20, pattern:/[#?!@$%^&*-]/})} type="password" name="password" placeholder="password" className="input input-bordered" />
+                            <input {...register('password', { required: true, minLength: 6, maxLength: 20, pattern: /[#?!@$%^&*-]/ })} type="password" name="password" placeholder="password" className="input input-bordered" />
 
                             {/* password validate  */}
-                            {errors.password?.type==='required' && <span className='text-red-700'>password is required</span>}
+                            {errors.password?.type === 'required' && <span className='text-red-700'>password is required</span>}
 
-                            {(errors.password?.type ==='minLength') && <span className='text-red-700'>At least 6 character</span>}
-                            {(errors.password?.type ==='maxLength') && <span className='text-red-700'>max 20 character</span>}
-                            {(errors.password?.type ==='pattern') && <span className='text-red-700'>one special character</span>}
+                            {(errors.password?.type === 'minLength') && <span className='text-red-700'>At least 6 character</span>}
+                            {(errors.password?.type === 'maxLength') && <span className='text-red-700'>max 20 character</span>}
+                            {(errors.password?.type === 'pattern') && <span className='text-red-700'>one special character</span>}
 
                             <label className="label">
                                 <LoadCanvasTemplate />
