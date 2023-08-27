@@ -1,11 +1,15 @@
 import { Outlet } from 'react-router-dom';
-import { FaCalendarAlt, FaHome, FaShoppingCart, FaWallet } from 'react-icons/fa';
+import { FaAddressBook, FaBook, FaCalendarAlt, FaFileContract, FaHistory, FaHome, FaHouseUser, FaShoppingCart, FaUser, FaUtensils, FaWallet } from 'react-icons/fa';
 import { NavLink } from "react-router-dom";
 import useCart from '../hooks/useCart';
 
 
 
 const DashBoard = () => {
+    // todo : admin
+    const isAdmin = true;
+
+
     const [cart] = useCart();
     return (
         <div className="drawer lg:drawer-open">
@@ -19,21 +23,40 @@ const DashBoard = () => {
             <div className="drawer-side bg-orange-00">
                 <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
                 <ul className="menu p-4 w-80 h-full bg-orange-900 ">
-                    {/* Sidebar content here */}
-                    <li><NavLink to={'/'}><FaHome></FaHome> User Home</NavLink></li>
-                    <li><NavLink to={'/dashboard/reservation'}><FaCalendarAlt></FaCalendarAlt>Reservation</NavLink></li>
-                    <li><NavLink to={'/dashboard/paymenthistory'}><FaWallet></FaWallet>Payment History</NavLink></li>
-                    <li className=''>
-                        <NavLink to={'/dashboard/mycart'}><FaShoppingCart></FaShoppingCart>My Cart
-                            <span className="badge badge-secondary">+{cart?.length || 0}</span>
-                        </NavLink>
-                    </li>
+
+                    {
+                        isAdmin ? <>
+
+                            {/* Sidebar content here */}
+                            <li><NavLink to={'/dashboard/home'}><FaHouseUser></FaHouseUser> Admin</NavLink></li>
+                            <li><NavLink to={'/dashboard/reservation'}><FaAddressBook></FaAddressBook> Add Items</NavLink></li>
+                            <li><NavLink to={'/dashboard/add'}><FaHistory></FaHistory>Manage Items</NavLink></li>
+                            <li><NavLink to={'/dashboard/history'}><FaBook></FaBook> Manage Bookings</NavLink></li>
+                            <li><NavLink to={'/dashboard/allusers'}><FaUser></FaUser>All Users</NavLink></li>
+
+                        </> : <>
+
+                            {/* Sidebar content here */}
+                            <li><NavLink to={'/'}><FaHome></FaHome> User Home</NavLink></li>
+                            <li><NavLink to={'/dashboard/reservation'}><FaCalendarAlt></FaCalendarAlt>Reservation</NavLink></li>
+                            <li><NavLink to={'/dashboard/paymenthistory'}><FaWallet></FaWallet>Payment History</NavLink></li>
+                            <li className=''>
+                                <NavLink to={'/dashboard/mycart'}><FaShoppingCart></FaShoppingCart>My Cart
+                                    <span className="badge badge-secondary">+{cart?.length || 0}</span>
+                                </NavLink>
+                            </li>
+
+                        </>
+                    }
+
+
 
                     <div className='divider'></div>
 
-                    <li><NavLink to={'/'}><FaHome></FaHome> Home</NavLink></li>
-                    <li><NavLink to={'/menu'}><FaWallet></FaWallet>Our Menu</NavLink></li>
-                    <li><NavLink to={'/orders/salad'}><FaShoppingCart></FaShoppingCart>Order Food</NavLink></li>
+                    <li><NavLink to={'/'}><FaHome></FaHome>Home</NavLink></li>
+                    <li><NavLink to={'/menu'}><FaWallet></FaWallet>Menu</NavLink></li>
+                    <li><NavLink to={'/orders/salad'}><FaShoppingCart></FaShoppingCart>Order</NavLink></li>
+                    <li><NavLink to={'/contact'}><FaFileContract></FaFileContract>Contact</NavLink></li>
                 </ul>
 
             </div>
