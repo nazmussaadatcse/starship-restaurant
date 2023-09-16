@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query'
-import { useContext } from 'react';
 import useAxiosSecure from './useAxiosSecure';
-import { AuthContext } from '../providers/AuthProvider';
+import useAuth from './useAuth';
+
 // tanstack query 
 const useCart = () => {
-    const { user } = useContext(AuthContext);
+    const { user } = useAuth();
     const [axiosSecure] = useAxiosSecure();
     // const token = localStorage.getItem('access-token')
 

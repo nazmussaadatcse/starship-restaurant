@@ -25,11 +25,13 @@ const MyCart = () => {
                 .then(res => res.json()
                 .then(data=>{
                     if(data.deletedCount > 0){
-                        Swal.fire(
-                            'Deleted!',
-                            'Your file has been deleted.',
-                            'success'
-                          );
+                          Swal.fire({
+                            position: 'top-center',
+                            icon: 'success',
+                            title: 'The product has been deleted',
+                            showConfirmButton: false,
+                            timer: 1500
+                          })
                           refetch(); // update cart
                     }
                 }))
