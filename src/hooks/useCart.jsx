@@ -4,12 +4,13 @@ import useAuth from './useAuth';
 
 // tanstack query 
 const useCart = () => {
-    const { user } = useAuth();
+    const { user , loading} = useAuth();
     const [axiosSecure] = useAxiosSecure();
     // const token = localStorage.getItem('access-token')
 
     const { refetch, data: cart = [] } = useQuery({
         queryKey: ['carts', user?.email],
+        enabled: !loading,
         queryFn: async () => {
             if (!user) {
                 return [];
