@@ -13,7 +13,7 @@ const DashBoard = () => {
 
     const [cart] = useCart();
 
-    
+
     return (
         <div className="drawer lg:drawer-open">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -29,16 +29,16 @@ const DashBoard = () => {
 
                     {
                         isAdmin ? <>
-
+                            {/* for admin  */}
                             {/* Sidebar content here */}
                             <li><NavLink to={'/dashboard/home'}><FaHouseUser></FaHouseUser> Admin</NavLink></li>
-                            <li><NavLink to={'/dashboard/reservation'}><FaAddressBook></FaAddressBook> Add Items</NavLink></li>
+                            <li><NavLink to={'/dashboard/additem'}><FaAddressBook></FaAddressBook> Add Items</NavLink></li>
                             <li><NavLink to={'/dashboard/add'}><FaHistory></FaHistory>Manage Items</NavLink></li>
                             <li><NavLink to={'/dashboard/history'}><FaBook></FaBook> Manage Bookings</NavLink></li>
                             <li><NavLink to={'/dashboard/allusers'}><FaUser></FaUser>All Users</NavLink></li>
 
                         </> : <>
-
+                            {/* for non admin  */}
                             {/* Sidebar content here */}
                             <li><NavLink to={'/'}><FaHome></FaHome> User Home</NavLink></li>
                             <li><NavLink to={'/dashboard/reservation'}><FaCalendarAlt></FaCalendarAlt>Reservation</NavLink></li>
@@ -53,7 +53,7 @@ const DashBoard = () => {
                     }
 
 
-
+                    {/* common options for users and admin  */}
                     <div className='divider'></div>
 
                     <li><NavLink to={'/'}><FaHome></FaHome>Home</NavLink></li>

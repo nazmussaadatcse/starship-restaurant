@@ -18,7 +18,15 @@ const useCart = () => {
             const response = await axiosSecure(`/carts?email=${user?.email}`)
             return response.data;
         },
-        // queryFn: async () => {
+    
+    })
+    return [cart, refetch, useAxiosSecure]
+
+};
+
+export default useCart;
+
+ // queryFn: async () => {
         //     const response = await fetch(`http://localhost:5000/carts?email=${user?.email}`,{
         //         headers:{
         //             authorization: `bearer ${token}`
@@ -26,9 +34,3 @@ const useCart = () => {
         //     })
         //     return response.json();
         // },
-    })
-    return [cart, refetch, useAxiosSecure]
-
-};
-
-export default useCart;

@@ -7,7 +7,7 @@ import useCart from "../../../hooks/useCart";
 
 const NavBar = () => {
     const { user, logOut } = useContext(AuthContext);
-    const [cart, setCart] =  useCart();
+    const [cart, setCart] = useCart();
 
     const handleLogout = () => {
         logOut()
@@ -17,18 +17,33 @@ const NavBar = () => {
             .catch(err => console.log(err));
     }
 
+    const cartButton = user ? (
+        <Link to={'/dashboard/mycart'}>
+            <button className="btn bg-black bg-opacity-5 hover:bg-transparent border text-pink-600 text-2xl">
+                <FaShoppingCart className="text-pink-600"></FaShoppingCart>
+                <div className="badge badge-secondary">+{cart?.length || 0}</div>
+            </button>
+        </Link>
+    ) : (
+        <button className="btn bg-black bg-opacity-5 hover:bg-transparent border text-pink-600 text-2xl" disabled>
+            <FaShoppingCart className="text-pink-600"></FaShoppingCart>
+            <div className="badge badge-secondary">+{cart?.length || 0}</div>
+        </button>
+    );
+
 
     const navOptions = <>
         <li><Link to={'/'}>Home</Link></li>
         <li><Link to={'/menu'}>Our Menu</Link></li>
         <li><Link to={'/orders/salad'}>Orders</Link></li>
+        <li>{cartButton}</li>
         <li>
-            <Link to={'/dashboard/mycart'}>
+            {/* <Link to={'/dashboard/mycart'}>
                 <button className="btn bg-black bg-opacity-5 hover:bg-transparent border text-pink-600 text-2xl">
                         <FaShoppingCart></FaShoppingCart>
                     <div className="badge badge-secondary">+{cart?.length || 0}</div>
                 </button>
-            </Link>
+            </Link> */}
         </li>
 
         {
