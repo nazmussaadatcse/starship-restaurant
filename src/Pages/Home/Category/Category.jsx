@@ -11,10 +11,10 @@ import SectionTitle from '../../../components/SectionTitle/SectionTitle';
 
 const Category = () => {
     return (
-        <section>
+        <section className='p-2'>
             <SectionTitle
-            heading={"Order Online"}
-            subHeading={"From 11:00 am to 10:00 pm"}
+                heading={"Order Online"}
+                subHeading={"From 11:00 am to 10:00 pm"}
             ></SectionTitle>
             <Swiper
                 slidesPerView={4}
@@ -27,19 +27,19 @@ const Category = () => {
                 className="mySwiper mb-16"
             >
                 <SwiperSlide><img src={slide1} alt="" />
-                    <h3 className='text-2xl text-white text-center uppercase -mt-16 shadow-lg pb-20'>Salads</h3>
+                    <h3 className=' text-xl text-white text-center uppercase -mt-16 shadow-xl pb-20'>Salads</h3>
                 </SwiperSlide>
                 <SwiperSlide><img src={slide2} alt="" />
-                    <h3 className='text-2xl text-white text-center uppercase -mt-16 shadow-lg pb-20'>Pizza</h3>
+                    <h3 className=' text-xl text-white text-center uppercase -mt-16 shadow-xl pb-20'>Pizza</h3>
                 </SwiperSlide>
                 <SwiperSlide><img src={slide3} alt="" />
-                    <h3 className='text-2xl text-white text-center uppercase -mt-16 shadow-lg pb-20'>Soup</h3>
+                    <h3 className=' text-xl text-white text-center uppercase -mt-16 shadow-xl pb-20'>Soup</h3>
                 </SwiperSlide>
                 <SwiperSlide><img src={slide4} alt="" />
-                    <h3 className='text-2xl text-white text-center uppercase -mt-16 shadow-lg pb-20'>Cake</h3>
+                    <h3 className=' text-xl text-white text-center uppercase -mt-16 shadow-xl pb-20'>Cake</h3>
                 </SwiperSlide>
                 <SwiperSlide><img src={slide5} alt="" />
-                    <h3 className='text-2xl text-white text-center uppercase -mt-16 shadow-lg pb-20'>Vegetable</h3>
+                    <h3 className=' text-xl text-white text-center uppercase -mt-16 shadow-xl pb-20'>Vegetable</h3>
                 </SwiperSlide>
             </Swiper>
         </section>

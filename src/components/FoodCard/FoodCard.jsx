@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { AuthContext } from '../../providers/AuthProvider';
 import Swal from "sweetalert2";
-import { Link , useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import useCart from "../../hooks/useCart";
 
 // optional chaining is imp 
@@ -20,7 +20,7 @@ const FoodCard = ({ item }) => {
         const cartItem = {menuItemId: _id, name, image, price, email:user?.email}
         // optional chaining is imp 
         if (user && user?.email) {
-            fetch('http://localhost:5000/carts',{
+            fetch('https://starship-restaurant-server.vercel.app/carts',{
                 method: 'POST',
                 headers:{
                     'content-type':'application/json'
@@ -60,7 +60,7 @@ const FoodCard = ({ item }) => {
 
 
     return (
-        <div className="card w-96 bg-base-100 shadow-xl">
+        <div className="card w-full bg-base-100 p-4 shadow-xl">
             <figure><img src={image} alt="Shoes" /></figure>
             <p className="bg-slate-800 absolute right-0 m-4 px-4 text-white">${price}</p>
             <div className="card-body flex flex-col items-center">

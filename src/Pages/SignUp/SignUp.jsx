@@ -2,12 +2,12 @@ import { useContext } from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { loadCaptchaEnginge, LoadCanvasTemplate, LoadCanvasTemplateNoReload, validateCaptcha } from 'react-simple-captcha';
+import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 import { AuthContext } from '../../providers/AuthProvider';
 import { useForm } from 'react-hook-form';
 import { Helmet } from 'react-helmet-async';
 import Swal from 'sweetalert2';
-import { data } from 'autoprefixer';
+import { } from 'autoprefixer';
 import SocialLogin from '../Shared/SocialLogin/SocialLogin';
 
 const SignUp = () => {
@@ -38,7 +38,7 @@ const SignUp = () => {
                         console.log('user profile info updated!');
 
                         const saveUser = {name: e.name, email: e.email};
-                        fetch('http://localhost:5000/users',{
+                        fetch('https://starship-restaurant-server.vercel.app/users',{
                             method: 'POST',
                             headers:{
                                 'content-type':'application/json'

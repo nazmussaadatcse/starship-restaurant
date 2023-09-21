@@ -13,7 +13,7 @@ const Testimonials = () => {
 
     const [reviews, setReviews] = useState([]);
     useEffect(() => {
-        fetch('http://localhost:5000/reviews')
+        fetch('https://starship-restaurant-server.vercel.app/reviews')
             .then(res => res.json())
             .then(data => setReviews(data))
     }, [])
@@ -30,7 +30,7 @@ const Testimonials = () => {
                     reviews.map(review => <SwiperSlide
                         key={review._id}
                     >
-                        <div className="my-16 mx-20 flex flex-col items-center p-4 rounded-2xl border shadow-lg">
+                        <div className="my-16 mx-10 md:mx-20 flex flex-col items-center p-4 rounded-2xl border shadow-lg">
                             <Rating
                                 style={{ maxWidth: 180 }}
                                 value={review.rating}

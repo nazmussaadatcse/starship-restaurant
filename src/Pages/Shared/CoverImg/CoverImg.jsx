@@ -17,7 +17,7 @@ const CoverImg = ({ img, title }) => {
             <div className="hero-content text-center text-neutral-content">
                 <div className="max-w-4xl bg-gray-800 bg-opacity-50 p-8">
                     <h1 className="mb-5 text-5xl font-bold uppercase">{title}</h1>
-                    <p className="mb-5 pl-16 pr-16">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
+                    <p className="mb-5 pl-4 pr-4 md:pl-16 md:pr-16 lg:pl-16 lg:pr-16">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
                     {/* <button className="btn btn-primary">Get Started</button> */}
                 </div>
             </div>

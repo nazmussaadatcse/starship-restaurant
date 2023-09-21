@@ -75,7 +75,7 @@ const NavBar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <a className="btn">Button</a>
+                    <a className="bg-white text-black p-2 rounded-lg hover:cursor-pointer">Contact</a>
                 </div>
             </div>
         </>

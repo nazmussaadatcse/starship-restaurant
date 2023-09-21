@@ -36,6 +36,7 @@ const DashBoard = () => {
                             <li><NavLink to={'/dashboard/add'}><FaHistory></FaHistory>Manage Items</NavLink></li>
                             <li><NavLink to={'/dashboard/history'}><FaBook></FaBook> Manage Bookings</NavLink></li>
                             <li><NavLink to={'/dashboard/allusers'}><FaUser></FaUser>All Users</NavLink></li>
+                            <li><NavLink to={'/dashboard/mycart'}><FaUser></FaUser>My Cart</NavLink></li>
 
                         </> : <>
                             {/* for non admin  */}
