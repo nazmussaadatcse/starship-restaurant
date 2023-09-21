@@ -8,7 +8,7 @@ const useAxiosSecure = () => {
 
     // Create an Axios instance with a base URL
     const axiosSecure = axios.create({
-        baseURL: 'https://starship-restaurant-server.vercel.app/', // Replace with your API base URL
+        baseURL: 'http://localhost:5000/', // Replace with your API base URL
     });
 
     // Add a request interceptor to inject the authorization header

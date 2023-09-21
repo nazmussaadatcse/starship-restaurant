@@ -38,7 +38,7 @@ const SignUp = () => {
                         console.log('user profile info updated!');
 
                         const saveUser = {name: e.name, email: e.email};
-                        fetch('https://starship-restaurant-server.vercel.app/users',{
+                        fetch('http://localhost:5000/users',{
                             method: 'POST',
                             headers:{
                                 'content-type':'application/json'
