@@ -18,9 +18,9 @@ const DashBoard = () => {
         <div className="drawer lg:drawer-open">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content flex flex-col items-center justify-center">
+                <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">Dashboard</label>
                 {/* Page content here */}
                 <Outlet></Outlet>
-                <label htmlFor="my-drawer-2" className="btn btn-primary drawer-button lg:hidden">Dashboard</label>
             </div>
 
             <div className="drawer-side bg-orange-00">
@@ -33,7 +33,7 @@ const DashBoard = () => {
                             {/* Sidebar content here */}
                             <li><NavLink to={'/dashboard/home'}><FaHouseUser></FaHouseUser> Admin</NavLink></li>
                             <li><NavLink to={'/dashboard/additem'}><FaAddressBook></FaAddressBook> Add Items</NavLink></li>
-                            <li><NavLink to={'/dashboard/add'}><FaHistory></FaHistory>Manage Items</NavLink></li>
+                            <li><NavLink to={'/dashboard/manageitems'}><FaHistory></FaHistory>Manage Items</NavLink></li>
                             <li><NavLink to={'/dashboard/history'}><FaBook></FaBook> Manage Bookings</NavLink></li>
                             <li><NavLink to={'/dashboard/allusers'}><FaUser></FaUser>All Users</NavLink></li>
                             <li><NavLink to={'/dashboard/mycart'}><FaUser></FaUser>My Cart</NavLink></li>
