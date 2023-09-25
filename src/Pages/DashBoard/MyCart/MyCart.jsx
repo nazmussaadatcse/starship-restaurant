@@ -49,7 +49,7 @@ const MyCart = () => {
             <div className='w-full uppercase font-bold flex justify-evenly h-12 items-center my-4 bg-slate-100 rounded-md'>
                 <h3>total items: {cart.length}</h3>
                 <h3>total price: ${total}</h3>
-                <Link to={"/dashboard/payment"}><button className='btn btn-warning btn-sm text-white font-bold my-4'>Pay Now</button></Link>
+                <Link to={"/dashboard/payment"}><button className='btn btn-warning btn-sm text-white bg-purple-700 font-bold my-4 hover:bg-purple-900'>Pay Now</button></Link>
             </div>
 
             <div className="w-full overflow-x-auto">
