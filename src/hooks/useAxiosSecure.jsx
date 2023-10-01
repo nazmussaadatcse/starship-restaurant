@@ -2,14 +2,15 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import useAuth from './useAuth';
 
+// Create an Axios instance with a base URL
+const axiosSecure = axios.create({
+    baseURL: 'http://localhost:5000/', // Replace with your API base URL
+});
+
 const useAxiosSecure = () => {
     const { logOut } = useAuth(); 
     const navigate = useNavigate();
 
-    // Create an Axios instance with a base URL
-    const axiosSecure = axios.create({
-        baseURL: 'http://localhost:5000/', // Replace with your API base URL
-    });
 
     // Add a request interceptor to inject the authorization header
     axiosSecure.interceptors.request.use(

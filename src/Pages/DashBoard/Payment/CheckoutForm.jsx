@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
 
-const CheckoutForm = ({ price }) => {
+const CheckoutForm = ({ price ,cart}) => {
 
     const stripe = useStripe();
     const elements = useElements();
@@ -24,7 +24,7 @@ const CheckoutForm = ({ price }) => {
             .catch(error => {
                 console.log('An error occurred while fetching the clientSecret:', error);
             });
-    }, [])
+    }, [price, axiosSecure])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -88,6 +88,22 @@ const CheckoutForm = ({ price }) => {
             if (paymentIntent.status === 'succeeded') {
                 const transactionId = paymentIntent.id;
                 setTransactionId(transactionId);
+                // save to server 
+                const payment = {
+                    email:user?.email, 
+                    transactionId,
+                    price,
+                    quantity: cart.length,
+                    items:cart.map(item=> item._id),
+                    itemsNames:cart.map(item=> item.name)
+                }
+                axiosSecure.post('/payments', payment)
+                .then(res=> {
+                    console.log(res.data);
+                    if(res.data.insertedId){
+                        //
+                    }
+                })
 
                 console.log('setProcessing(false)');
                 setProcessing(false);
