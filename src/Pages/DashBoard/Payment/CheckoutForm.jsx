@@ -2,8 +2,9 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useState, useEffect } from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import useAuth from "../../../hooks/useAuth";
+import Swal from "sweetalert2";
 
-const CheckoutForm = ({ price ,cart}) => {
+const CheckoutForm = ({ price, cart }) => {
 
     const stripe = useStripe();
     const elements = useElements();
@@ -16,14 +17,16 @@ const CheckoutForm = ({ price ,cart}) => {
 
 
     useEffect(() => {
-        axiosSecure.post('/create-payment-intent', { price })
-            .then(res => {
-                // console.log(res.data.clientSecret);
-                setClientSecret(res.data.clientSecret);
-            })
-            .catch(error => {
-                console.log('An error occurred while fetching the clientSecret:', error);
-            });
+        if (price > 0) {
+            axiosSecure.post('/create-payment-intent', { price })
+                .then(res => {
+                    // console.log(res.data.clientSecret);
+                    setClientSecret(res.data.clientSecret);
+                })
+                .catch(error => {
+                    console.log('An error occurred while fetching the clientSecret:', error);
+                })
+        }
     }, [price, axiosSecure])
 
     const handleSubmit = async (e) => {
@@ -90,20 +93,29 @@ const CheckoutForm = ({ price ,cart}) => {
                 setTransactionId(transactionId);
                 // save to server 
                 const payment = {
-                    email:user?.email, 
+                    email: user?.email,
                     transactionId,
                     price,
+                    date: new Date(),
+                    orderStatus: 'service pending',
                     quantity: cart.length,
-                    items:cart.map(item=> item._id),
-                    itemsNames:cart.map(item=> item.name)
+                    cartItems: cart.map(item => item._id),
+                    menuItems: cart.map(item => item.menuItemId),
+                    itemsNames: cart.map(item => item.name)
                 }
                 axiosSecure.post('/payments', payment)
-                .then(res=> {
-                    console.log(res.data);
-                    if(res.data.insertedId){
-                        //
-                    }
-                })
+                    .then(res => {
+                        console.log(res.data);
+                        if (res.data.insertResult.insertedId) {
+                            Swal.fire({
+                                position: 'top-center',
+                                icon: 'success',
+                                title: 'Payment Successful!',
+                                showConfirmButton: false,
+                                timer: 1500
+                            })
+                        }
+                    })
 
                 console.log('setProcessing(false)');
                 setProcessing(false);
@@ -124,9 +136,10 @@ const CheckoutForm = ({ price ,cart}) => {
     return (
         // 0-Card-Minimal.js 
         <div className="flex flex-col justify-center items-center">
-            <form className="w-2/3 p-8 bg-slate-100 shadow-md" onSubmit={handleSubmit}>
+            <div className="text-green-700 text-lg p-2 font-semibold">total paying ${price}</div>
+            <form className="w-2/3 p-8 bg-slate-200 shadow-md rounded-md" onSubmit={handleSubmit}>
 
-                <CardElement
+                <CardElement className="bg-white p-2 rounded-md"
                     options={{
                         style: {
                             base: {
@@ -146,8 +159,8 @@ const CheckoutForm = ({ price ,cart}) => {
                     Pay
                 </button>
                 <p className="w-1/2 text-sm font-bold mt-2 text-red-700 bg-yellow-200 my-1">{cardError}</p>
-                
-                {transactionId ? <p className="w-1/2 p-1 rounded-md text-xs font-bold mt-2 text-white bg-green-600 my-1">transaction complete. <br /> TxID: {transactionId}</p> :''  
+
+                {transactionId ? <p className="w-1/2 p-1 rounded-md text-xs font-bold mt-2 text-white bg-green-600 my-1">transaction complete. <br /> TxID: {transactionId}</p> : ''
                 }
 
             </form>
