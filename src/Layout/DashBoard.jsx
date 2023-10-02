@@ -31,7 +31,7 @@ const DashBoard = () => {
                         isAdmin ? <>
                             {/* for admin  */}
                             {/* Sidebar content here */}
-                            <li><NavLink to={'/dashboard/home'}><FaHouseUser></FaHouseUser> Admin</NavLink></li>
+                            <li><NavLink to={'/dashboard/adminhome'}><FaHouseUser></FaHouseUser> Admin Home</NavLink></li>
                             <li><NavLink to={'/dashboard/additem'}><FaAddressBook></FaAddressBook> Add Items</NavLink></li>
                             <li><NavLink to={'/dashboard/manageitems'}><FaHistory></FaHistory>Manage Items</NavLink></li>
                             <li><NavLink to={'/dashboard/history'}><FaBook></FaBook> Manage Bookings</NavLink></li>
@@ -41,7 +41,7 @@ const DashBoard = () => {
                         </> : <>
                             {/* for non admin  */}
                             {/* Sidebar content here */}
-                            <li><NavLink to={'/'}><FaHome></FaHome> User Home</NavLink></li>
+                            <li><NavLink to={'/dashboard/userhome'}><FaHome></FaHome> User Home</NavLink></li>
                             <li><NavLink to={'/dashboard/reservation'}><FaCalendarAlt></FaCalendarAlt>Reservation</NavLink></li>
                             <li><NavLink to={'/dashboard/paymenthistory'}><FaWallet></FaWallet>Payment History</NavLink></li>
                             <li className=''>
